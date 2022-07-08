@@ -17,6 +17,7 @@ int main()
 
 	cout << "\nЗапуск процесса загрузки информации аэропорта.";
 	Gdansk->loadInfoAP();
+	Gdansk->toBin();
 	cout << "\nНачало работы системы терминала.\n\n";
 	// Bonus
 	system("start Port_lotniczy.jpg");
@@ -125,6 +126,7 @@ int main()
 
 	cout << "\nЗапуск процесса сохранения информации аэропорта.";
 	Gdansk->saveInfoAP();
+	Gdansk->toBin();
 	cout << "\nЗавершение работы системы терминала.\n";
 	if (Gdansk != NULL) delete Gdansk;
 	return 0;

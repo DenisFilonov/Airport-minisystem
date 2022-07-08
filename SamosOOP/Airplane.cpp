@@ -181,7 +181,7 @@ int Airplane::getMaxAmount() const
     return maxAmount;
 }
 
-void Airplane::showInfo()
+void Airplane::showInfo() const
 {
     cout << "\nНомер рейса: " << this->flightNumber;
     cout << "\nНаправление рейса: " << this->direction;
@@ -206,4 +206,33 @@ void Airplane::loadInfoA(ifstream& file)
 
     file >> this->amountInside;
     file >> this->maxAmount;
+}
+
+void Airplane::toBin(ofstream& file)
+{
+    int tmp = 0;
+    tmp = flightNumber.size();
+    file.write((char*)&tmp, sizeof(int));
+
+    file.write(flightNumber.c_str(), tmp);
+
+    tmp = direction.size();
+    file.write((char*)&tmp, sizeof(int));
+    file.write(direction.c_str(), tmp);
+
+    file.write((char*)&amountInside, sizeof(int));
+    file.write((char*)&maxAmount, sizeof(int));
+}
+
+void Airplane::frBin(ifstream& file)
+{
+    int tmp = 0;
+    file.read((char*)&tmp, sizeof(int));
+    file.read((char*)&flightNumber, tmp);
+
+    file.read((char*)&tmp, sizeof(int));
+    file.read((char*)&direction, tmp);
+
+    file.read((char*)&amountInside, sizeof(int));
+    file.read((char*)&maxAmount, sizeof(int));
 }

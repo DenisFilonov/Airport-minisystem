@@ -187,3 +187,49 @@ void Airport::loadInfoAP()
 		arr = nullptr;
 	}
 }
+
+void Airport::toBin()
+{
+	ofstream fw("Airport.dat",ios::binary | ios::out);
+
+	if (fw.is_open())
+	{
+		//fw << this->size << endl;
+		fw.write((char*)&size, sizeof(int)); // this->size ==> &size
+		for (int i = 0; i < this->size; i++)
+		{
+			arr[i].toBin(fw);
+		}
+		fw.close();
+		cout << "\nДанные аэропорта успешно загружены в базу данных!\n\n";
+	}
+	else
+	{
+		cout << "\nОшибка загрузки базы данных аэропорта! Проверьте файлы.\n\n";
+	}
+
+}
+
+void Airport::frBin()
+{
+	ifstream fr("Airport.dat", ios::binary | ios::in);
+	if (fr.is_open())
+	{
+		//fr >> this->size;
+		fr.read((char*)&size, sizeof(int));
+		arr = new Airplane[size];
+
+		for (int i = 0; i < this->size; i++)
+		{
+			arr[i].frBin(fr);
+		}
+		fr.close();
+		cout << "\nДанные аэропорта успешно выгружены из базы данных!\n\n";
+	}
+	else
+	{
+		cout << "\nОшибка выгрузки базы данных аэропорта! Проверьте файлы.\n\n";
+		this->size = 0;
+		arr = nullptr;
+	}
+}

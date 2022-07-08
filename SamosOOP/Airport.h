@@ -30,5 +30,8 @@ public:
 
 	void saveInfoAP();
 	void loadInfoAP();
+
+	void toBin();
+	void frBin();
 };
 

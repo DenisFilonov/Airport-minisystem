@@ -67,9 +67,12 @@ public:
 	int getMaxAmount()const;
 
 	
-	void showInfo();
+	void showInfo()const;
 
 	void saveInfoA(ofstream& file);
 	void loadInfoA(ifstream& file);
+
+	void toBin(ofstream& file);
+	void frBin(ifstream& file);
 };
 
